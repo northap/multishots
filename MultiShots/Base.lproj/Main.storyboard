@@ -181,6 +181,7 @@
                     </view>
                     <connections>
                         <outlet property="bgImageView" destination="M1N-fL-bm0" id="sTH-Ik-K7B"/>
+                        <outlet property="blackBgView" destination="yCa-9f-y8p" id="PyP-NC-4jR"/>
                         <outlet property="cameraPreview" destination="W4f-nh-W5I" id="4GU-nK-Xir"/>
                         <outlet property="cameraStill" destination="sef-d6-0Tb" id="moC-uM-fcr"/>
                         <outlet property="closeButton" destination="DE4-xY-2bb" id="oPx-oJ-uBU"/>
@@ -248,7 +249,6 @@
         <!--Navigation Controller-->
         <scene sceneID="ypQ-bC-eUW">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NaZ-et-LbO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Ns-V8-Oxn" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rE4-wJ-oAa">
@@ -260,6 +260,7 @@
                         <segue destination="ESs-IP-2Ir" kind="relationship" relationship="rootViewController" id="aAs-2p-tIX"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NaZ-et-LbO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2132" y="108"/>
         </scene>

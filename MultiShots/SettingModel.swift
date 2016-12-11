@@ -46,21 +46,42 @@ class SettingModel: NSObject, Mappable {
     
     func home_bg_decoding() -> UIImage {
         let decodedData = Data(base64Encoded: self.home_bg!, options:NSData.Base64DecodingOptions(rawValue: 0))
-        return UIImage(data: decodedData!)!
+        
+        if let image = UIImage(data: decodedData!) {
+            return image
+        } else {
+            return UIImage()
+        }
+
     }
     
     func logo_decoding() -> UIImage {
         let decodedData = Data(base64Encoded: self.logo!, options:NSData.Base64DecodingOptions(rawValue: 0))
-        return UIImage(data: decodedData!)!
+        
+        if let image = UIImage(data: decodedData!) {
+            return image
+        } else {
+            return UIImage()
+        }
     }
     
     func camera_page_bg_decoding() -> UIImage {
         let decodedData = Data(base64Encoded: self.camera_page_bg!, options:NSData.Base64DecodingOptions(rawValue: 0))
-        return UIImage(data: decodedData!)!
+        
+        if let image = UIImage(data: decodedData!) {
+            return image
+        } else {
+            return UIImage()
+        }
     }
     
     func final_image_page_bg_decoding() -> UIImage {
         let decodedData = Data(base64Encoded: self.final_image_page_bg!, options:NSData.Base64DecodingOptions(rawValue: 0))
-        return UIImage(data: decodedData!)!
+        
+        if let image = UIImage(data: decodedData!) {
+            return image
+        } else {
+            return UIImage()
+        }
     }
 }

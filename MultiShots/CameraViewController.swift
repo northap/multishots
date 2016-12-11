@@ -20,6 +20,7 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
     @IBOutlet weak var cameraPreview: UIView!
     @IBOutlet weak var bgImageView: UIImageView!
     @IBOutlet weak var retakeButton: UIButton!
+    @IBOutlet weak var blackBgView: UIView!
     
     var preview: AVCaptureVideoPreviewLayer?
     var camera: XMCCamera?
@@ -47,8 +48,6 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
 
         self.countUpdated = self.countDownTime
         self.roundUpdated = 0
-        
-        self.bgImageView.image = self.cameraBg
         
         self.waitTimer = Timer.scheduledTimer(timeInterval: Double(idleTime), target: self, selector: #selector(self.updateWaitTimer), userInfo: nil, repeats: false)
 
@@ -102,11 +101,13 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
                                 scale:1, 
                                 orientation: image!.imageOrientation )
                     
-                    self.cameraStill.image = finalImage;
+                    let flipImage = UIImage(cgImage: finalImage.cgImage!, scale: finalImage.scale , orientation: .leftMirrored)
                     
-                    UIImageWriteToSavedPhotosAlbum(finalImage, nil, nil, nil)
+                    self.cameraStill.image = flipImage
                     
-                    self.storeImages.append(finalImage)
+                    CustomPhotoAlbum.sharedInstance.saveImage(image: flipImage)
+                    
+                    self.storeImages.append(flipImage)
                 
                     UIView.animate(withDuration: 0.225, animations: { () -> Void in
                         self.cameraStill.alpha = 1.0;
@@ -172,6 +173,8 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
     
     func uploadImages(userImages:[UserImageModel]) {
         
+        self.shotButton.isHidden = true
+        
         self.responseTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.updateResponseTimer), userInfo: nil, repeats: false)
         
         self.requestFinalImage = ApiClient.getFinalImage(userImages: userImages) { responseObject, error in
@@ -182,18 +185,13 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
                 self.responseTimer.invalidate()
                 self.responseTimer = nil
                 
-                self.bgImageView.image = self.finalImageBg
+                self.setStatusButtonComplete()
                 
                 self.cameraStill.image = responseObject?.card_image_decoding()
                 
                 CustomPhotoAlbum.sharedInstance.saveImage(image: self.cameraStill.image!)
                 
                 self.cardId = responseObject?.card_id
-                
-                self.cameraStill.alpha = 1.0
-                self.cameraPreview.alpha = 0.0
-
-                self.setStatusButtonComplete()
                 
             } else {
                 
@@ -226,11 +224,6 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
     }
     @IBAction func retakeAction(_ sender: Any) {
         setStatusButtonStart();
-        
-        self.cameraPreview.alpha = 1.0
-        self.cameraStill.alpha = 0.0
-        
-        self.countLabel.text = ""
     }
     
     @IBAction func shotsAction(_ sender: Any) {
@@ -255,8 +248,6 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
             }
         } else {
             setStatusButtonStart();
-            
-            self.countLabel.text = ""
             
             self.timer.invalidate()
             self.timer = nil
@@ -288,15 +279,23 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
     }
     
     func setStatusButtonStart() {
+        self.blackBgView.isHidden = false
         self.retakeButton.isHidden = true
         self.confirmButton.isHidden = true
         self.closeButton.isHidden = false
         self.shotButton.isHidden = false
         
         self.shotButton.setImage(UIImage(named: "shot"), for: .normal)
+        self.bgImageView.image = self.cameraBg
+        
+        self.cameraPreview.alpha = 1.0
+        self.cameraStill.alpha = 0.0
+        
+        self.countLabel.text = ""
     }
     
     func setStatusButtonWorking() {
+        self.blackBgView.isHidden = false
         self.shotButton.isHidden = false
         self.retakeButton.isHidden = true
         self.confirmButton.isHidden = true
@@ -306,10 +305,16 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
     }
     
     func setStatusButtonComplete() {
+        self.blackBgView.isHidden = true
         self.confirmButton.isHidden = false
         self.closeButton.isHidden = true
         self.retakeButton.isHidden = false
         self.shotButton.isHidden = true
+        
+        self.bgImageView.image = self.finalImageBg
+        
+        self.cameraStill.alpha = 1.0
+        self.cameraPreview.alpha = 0.0
     }
     
     
