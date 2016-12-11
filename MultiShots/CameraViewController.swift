@@ -80,10 +80,12 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
         
         if self.countUpdated == 0 {
             self.countUpdated = self.countDownTime + 1
+            
             UIView.animate(withDuration: 5.0, animations: {
                 self.cameraStill.alpha = 0.0;
+                
             }, completion: { (finished:Bool) in
-        
+                
             self.camera?.captureStillImage({ (image) -> Void in
                 if image != nil {
                     
@@ -98,17 +100,17 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
                     
                     let finalImage : UIImage =
                         UIImage(cgImage: image!.cgImage!.cropping(to: cropRect)!,
-                                scale:1, 
-                                orientation: image!.imageOrientation )
+                                scale: 1.0,
+                                orientation: .leftMirrored)
                     
-                    let flipImage = UIImage(cgImage: finalImage.cgImage!, scale: finalImage.scale , orientation: .leftMirrored)
+                    self.cameraStill.image = finalImage
                     
-                    self.cameraStill.image = flipImage
+                    self.storeImages.append(finalImage)
+                    
+                    let flipImage = UIImage(cgImage: finalImage.cgImage!, scale: finalImage.scale, orientation: .rightMirrored)
                     
                     CustomPhotoAlbum.sharedInstance.saveImage(image: flipImage)
-                    
-                    self.storeImages.append(flipImage)
-                
+            
                     UIView.animate(withDuration: 0.225, animations: { () -> Void in
                         self.cameraStill.alpha = 1.0;
                         self.cameraPreview.alpha = 0.0;
@@ -141,11 +143,11 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
                 } else {
                 
                 }
-            
-            
+        
             })
                 
             })
+            
             } else {
                 UIView.animate(withDuration: 0.225, animations: { () -> Void in
                     self.cameraStill.alpha = 0.0;
