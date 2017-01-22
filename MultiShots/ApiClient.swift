@@ -19,7 +19,7 @@ class ApiClient: NSObject {
         
         let apiUrl:String = defaults.string(forKey: "url_api")!
         
-        let request = "{ 'requester_id' : \"\(self.udid)\", 'request_type' : \"app_initial_setting\" }"
+        let request = "{ \"requester_id\" : \"\(self.udid)\", \"request_type\" : \"app_initial_setting\" }"
         
         let params = ["request_command": request]
         
@@ -49,7 +49,7 @@ class ApiClient: NSObject {
      
         let json = JSON(obj)
 
-        let request = "{ 'requester_id' : \"\(self.udid)\", 'request_type' : \"card_generate\", 'user_images' : \(json) }"
+        let request = "{ \"requester_id\" : \"\(self.udid)\", \"request_type\" : \"card_generate\", \"user_images\" : \(json) }"
         
         let params = ["request_command": request]
         
@@ -70,7 +70,7 @@ class ApiClient: NSObject {
         
         let apiUrl:String = defaults.string(forKey: "url_api")!
         
-        let request = "{ 'requester_id' : \"\(self.udid)\", 'request_type' : \"card_confirmation\", 'card_id' : \"\(cardId)\", 'confirm_type' : \"1\" }"
+        let request = "{ \"requester_id\" : \"\(self.udid)\", \"request_type\" : \"card_confirmation\", \"card_id\" : \"\(cardId)\", \"confirm_type\" : \"1\" }"
         
         let params = ["request_command": request]
         
