@@ -177,22 +177,27 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
         
         self.shotButton.isHidden = true
         
-        self.responseTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.updateResponseTimer), userInfo: nil, repeats: false)
+        //self.responseTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.updateResponseTimer), userInfo: nil, repeats: false)
+        
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.detailsLabel.text = "Tap to cancel"
+        let tap = UITapGestureRecognizer(target: self, action: #selector(cancelButton))
+        hud.addGestureRecognizer(tap)
         
         self.requestFinalImage = ApiClient.getFinalImage(userImages: userImages) { responseObject, error in
             print("responseObject = \(responseObject); error =\(error)")
             
             if (error == nil) {
                 
-                self.responseTimer.invalidate()
-                self.responseTimer = nil
+                //self.responseTimer.invalidate()
+                //self.responseTimer = nil
                 
                 self.setStatusButtonComplete()
                 
                 self.cameraStill.image = responseObject?.card_image_decoding()
                 
                 CustomPhotoAlbum.sharedInstance.saveImage(image: self.cameraStill.image!)
-                
+
                 self.cardId = responseObject?.card_id
                 
             } else {
@@ -200,9 +205,15 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
 
             }
             
+            hud.hide(animated: true)
+            
             return
         }
         
+    }
+    
+    func cancelButton() {
+        self.updateResponseTimer()
     }
     
     func updateResponseTimer() {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4643246CB8618D805AEC0524 /* Pods_MultiShots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68EB02284F8FAA3FE2A8DFDA /* Pods_MultiShots.framework */; };
+		712772C11E86097A00873743 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 712772C01E86097A00873743 /* MBProgressHUD.m */; };
 		8B5A29E81DDB1E7F0053DA1B /* CustomPhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5A29E71DDB1E7F0053DA1B /* CustomPhotoAlbum.swift */; };
 		8BCEA75D1DD574FE008E981A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCEA75C1DD574FE008E981A /* AppDelegate.swift */; };
 		8BCEA75F1DD574FE008E981A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCEA75E1DD574FE008E981A /* ViewController.swift */; };
@@ -28,6 +29,9 @@
 		11A16EEE0A4E1CDED6C15AD5 /* Pods-MultiShots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiShots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MultiShots/Pods-MultiShots.debug.xcconfig"; sourceTree = "<group>"; };
 		37D52F170FA4DE1A59612D4F /* Pods-MultiShots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MultiShots.release.xcconfig"; path = "Pods/Target Support Files/Pods-MultiShots/Pods-MultiShots.release.xcconfig"; sourceTree = "<group>"; };
 		68EB02284F8FAA3FE2A8DFDA /* Pods_MultiShots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MultiShots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		712772A11E8606B300873743 /* Bridging_Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging_Header.h; sourceTree = "<group>"; };
+		712772BF1E86097A00873743 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		712772C01E86097A00873743 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		8B5A29E71DDB1E7F0053DA1B /* CustomPhotoAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPhotoAlbum.swift; sourceTree = "<group>"; };
 		8BCEA7591DD574FE008E981A /* MultiShots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiShots.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BCEA75C1DD574FE008E981A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +69,15 @@
 				37D52F170FA4DE1A59612D4F /* Pods-MultiShots.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		712772BE1E86096800873743 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				712772BF1E86097A00873743 /* MBProgressHUD.h */,
+				712772C01E86097A00873743 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		8B5A29E91DDC07F70053DA1B /* ViewCell */ = {
@@ -106,6 +119,7 @@
 		8BCEA75B1DD574FE008E981A /* MultiShots */ = {
 			isa = PBXGroup;
 			children = (
+				712772BE1E86096800873743 /* MBProgressHUD */,
 				8B5A29EA1DDC08060053DA1B /* ViewController */,
 				8B5A29E91DDC07F70053DA1B /* ViewCell */,
 				8BCEA7831DDAEDA0008E981A /* Core */,
@@ -115,6 +129,7 @@
 				8BCEA7631DD574FE008E981A /* Assets.xcassets */,
 				8BCEA7651DD574FE008E981A /* LaunchScreen.storyboard */,
 				8BCEA7681DD574FE008E981A /* Info.plist */,
+				712772A11E8606B300873743 /* Bridging_Header.h */,
 			);
 			path = MultiShots;
 			sourceTree = "<group>";
@@ -278,6 +293,7 @@
 				8BCEA76F1DD5762D008E981A /* CameraViewController.swift in Sources */,
 				8BCEA77C1DD959B5008E981A /* ApiClient.swift in Sources */,
 				8BCEA7771DD6F981008E981A /* ShowImagesViewController.swift in Sources */,
+				712772C11E86097A00873743 /* MBProgressHUD.m in Sources */,
 				8BCEA7751DD5BB25008E981A /* ImageTableViewCell.swift in Sources */,
 				8BCEA7801DD9B6BA008E981A /* UserImageModel.swift in Sources */,
 				8BCEA77A1DD957CC008E981A /* SettingModel.swift in Sources */,
@@ -414,6 +430,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mark.MultiShots;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = MultiShots/Bridging_Header.h;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -431,6 +448,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mark.MultiShots;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = MultiShots/Bridging_Header.h;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
