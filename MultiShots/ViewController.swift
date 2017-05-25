@@ -14,8 +14,10 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var bgImageView: UIImageView!
+    
     var settings: SettingModel?
     var urlTextField: UITextField!
+    var isSquare : Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,24 +50,37 @@ class ViewController: UIViewController {
     }
     
     func chooseOrientation() {
-        let alert = UIAlertController(title: "Choose Orientation", message: "", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Choose Type", message: "", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Square", style: .default, handler: { (UIAlertAction) in
+            OrientationSingleton.sharedInstance.isPortrait = true
+            self.isSquare = true
+        }))
         
         alert.addAction(UIAlertAction(title: "Portrait", style: .default, handler: { (UIAlertAction) in
             OrientationSingleton.sharedInstance.isPortrait = true
+            self.isSquare = false
         }))
         
         alert.addAction(UIAlertAction(title: "Landscape", style: .default, handler: { (UIAlertAction) in
-             OrientationSingleton.sharedInstance.isPortrait = false
+            OrientationSingleton.sharedInstance.isPortrait = false
+            self.isSquare = false
         }))
         
         self.present(alert, animated: true, completion: nil)
     }
     
     func viewTapped() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "cameraVC") as! CameraViewController
         
-        self.present(controller, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if self.isSquare {
+            let controller = storyboard.instantiateViewController(withIdentifier: "cameraSquareVC") as! CameraSquareViewController
+            self.present(controller, animated: true, completion: nil)
+        } else {
+            let controller = storyboard.instantiateViewController(withIdentifier: "cameraVC") as! CameraViewController
+            self.present(controller, animated: true, completion: nil)
+        }
     }
     
     @IBAction func urlApiAction(_ sender: Any) {
