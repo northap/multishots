@@ -105,11 +105,21 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
                     
                     self.cameraStill.image = finalImage
                     
-                    self.storeImages.append(finalImage)
-                    
-                    let flipImage = UIImage(cgImage: finalImage.cgImage!, scale: finalImage.scale, orientation: .rightMirrored)
-                    
-                    CustomPhotoAlbum.sharedInstance.saveImage(image: flipImage)
+                    if OrientationSingleton.sharedInstance.isPortrait {
+                        
+                        self.storeImages.append(finalImage)
+                        let flipImage = UIImage(cgImage: finalImage.cgImage!, scale: finalImage.scale, orientation: .rightMirrored)
+                        
+                        CustomPhotoAlbum.sharedInstance.saveImage(image: flipImage)
+                        
+                    } else {
+                        
+                        let flipImage = UIImage(cgImage: finalImage.cgImage!, scale: finalImage.scale, orientation: .downMirrored)
+                        self.storeImages.append(flipImage)
+                        
+                        CustomPhotoAlbum.sharedInstance.saveImage(image: flipImage)
+                    }
+
             
                     UIView.animate(withDuration: 0.225, animations: { () -> Void in
                         self.cameraStill.alpha = 1.0;

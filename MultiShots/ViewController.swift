@@ -31,6 +31,12 @@ class ViewController: UIViewController {
         
         self.loadInitialSetting()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.chooseOrientation()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -39,6 +45,20 @@ class ViewController: UIViewController {
     
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    func chooseOrientation() {
+        let alert = UIAlertController(title: "Choose Orientation", message: "", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Portrait", style: .default, handler: { (UIAlertAction) in
+            OrientationSingleton.sharedInstance.isPortrait = true
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Landscape", style: .default, handler: { (UIAlertAction) in
+             OrientationSingleton.sharedInstance.isPortrait = false
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     func viewTapped() {

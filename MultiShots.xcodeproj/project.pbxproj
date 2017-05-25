@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4643246CB8618D805AEC0524 /* Pods_MultiShots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68EB02284F8FAA3FE2A8DFDA /* Pods_MultiShots.framework */; };
 		712772C11E86097A00873743 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 712772C01E86097A00873743 /* MBProgressHUD.m */; };
+		71F5EF5A1ED497C500717C49 /* OrientationSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F5EF591ED497C500717C49 /* OrientationSingleton.swift */; };
 		8B5A29E81DDB1E7F0053DA1B /* CustomPhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5A29E71DDB1E7F0053DA1B /* CustomPhotoAlbum.swift */; };
 		8BCEA75D1DD574FE008E981A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCEA75C1DD574FE008E981A /* AppDelegate.swift */; };
 		8BCEA75F1DD574FE008E981A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCEA75E1DD574FE008E981A /* ViewController.swift */; };
@@ -32,6 +33,7 @@
 		712772A11E8606B300873743 /* Bridging_Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging_Header.h; sourceTree = "<group>"; };
 		712772BF1E86097A00873743 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		712772C01E86097A00873743 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		71F5EF591ED497C500717C49 /* OrientationSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrientationSingleton.swift; sourceTree = "<group>"; };
 		8B5A29E71DDB1E7F0053DA1B /* CustomPhotoAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPhotoAlbum.swift; sourceTree = "<group>"; };
 		8BCEA7591DD574FE008E981A /* MultiShots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiShots.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BCEA75C1DD574FE008E981A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				8BCEA75E1DD574FE008E981A /* ViewController.swift */,
 				8BCEA76E1DD5762D008E981A /* CameraViewController.swift */,
 				8BCEA7761DD6F981008E981A /* ShowImagesViewController.swift */,
+				71F5EF591ED497C500717C49 /* OrientationSingleton.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -197,7 +200,7 @@
 				TargetAttributes = {
 					8BCEA7581DD574FE008E981A = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 89ZGG9R768;
+						DevelopmentTeam = UETLE4F94A;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -291,6 +294,7 @@
 				8B5A29E81DDB1E7F0053DA1B /* CustomPhotoAlbum.swift in Sources */,
 				8BCEA75D1DD574FE008E981A /* AppDelegate.swift in Sources */,
 				8BCEA76F1DD5762D008E981A /* CameraViewController.swift in Sources */,
+				71F5EF5A1ED497C500717C49 /* OrientationSingleton.swift in Sources */,
 				8BCEA77C1DD959B5008E981A /* ApiClient.swift in Sources */,
 				8BCEA7771DD6F981008E981A /* ShowImagesViewController.swift in Sources */,
 				712772C11E86097A00873743 /* MBProgressHUD.m in Sources */,
@@ -424,11 +428,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 89ZGG9R768;
+				DEVELOPMENT_TEAM = UETLE4F94A;
 				INFOPLIST_FILE = MultiShots/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mark.MultiShots;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mark.multishots.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = MultiShots/Bridging_Header.h;
 				SWIFT_VERSION = 3.0;
@@ -442,11 +446,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 89ZGG9R768;
+				DEVELOPMENT_TEAM = UETLE4F94A;
 				INFOPLIST_FILE = MultiShots/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mark.MultiShots;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mark.multishots.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = MultiShots/Bridging_Header.h;
 				SWIFT_VERSION = 3.0;
