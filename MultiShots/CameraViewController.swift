@@ -44,6 +44,12 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if OrientationSingleton.sharedInstance.isPortrait == false {
+            self.countLabel.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
+            self.retakeButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
+            self.confirmButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
+        }
+        
         self.setStatusButtonStart()
 
         self.countUpdated = self.countDownTime
@@ -204,9 +210,21 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
                 
                 self.setStatusButtonComplete()
                 
-                self.cameraStill.image = responseObject?.card_image_decoding()
+                if OrientationSingleton.sharedInstance.isPortrait == false {
+                    let flipImage = UIImage(cgImage: (responseObject?.card_image_decoding().cgImage!)!, scale: (responseObject?.card_image_decoding().scale)!, orientation: .right)
+                    
+                    self.cameraStill.image = flipImage
+                    
+                    CustomPhotoAlbum.sharedInstance.saveImage(image: (responseObject?.card_image_decoding())!)
+                    
+                } else {
+   
+                    self.cameraStill.image = responseObject?.card_image_decoding()
+                    
+                    CustomPhotoAlbum.sharedInstance.saveImage(image: self.cameraStill.image!)
+                }
                 
-                CustomPhotoAlbum.sharedInstance.saveImage(image: self.cameraStill.image!)
+
 
                 self.cardId = responseObject?.card_id
                 

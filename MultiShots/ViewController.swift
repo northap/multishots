@@ -17,7 +17,6 @@ class ViewController: UIViewController {
     
     var settings: SettingModel?
     var urlTextField: UITextField!
-    var isSquare : Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,12 +33,6 @@ class ViewController: UIViewController {
         self.loadInitialSetting()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.chooseOrientation()
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -54,18 +47,20 @@ class ViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: "Square", style: .default, handler: { (UIAlertAction) in
             OrientationSingleton.sharedInstance.isPortrait = true
-            self.isSquare = true
+            OrientationSingleton.sharedInstance.isSquare = true
         }))
         
         alert.addAction(UIAlertAction(title: "Portrait", style: .default, handler: { (UIAlertAction) in
             OrientationSingleton.sharedInstance.isPortrait = true
-            self.isSquare = false
+            OrientationSingleton.sharedInstance.isSquare = false
         }))
         
         alert.addAction(UIAlertAction(title: "Landscape", style: .default, handler: { (UIAlertAction) in
             OrientationSingleton.sharedInstance.isPortrait = false
-            self.isSquare = false
+            OrientationSingleton.sharedInstance.isSquare = false
         }))
+    
+        alert.popoverPresentationController?.sourceView = self.view
         
         self.present(alert, animated: true, completion: nil)
     }
@@ -74,7 +69,7 @@ class ViewController: UIViewController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        if self.isSquare {
+        if OrientationSingleton.sharedInstance.isSquare {
             let controller = storyboard.instantiateViewController(withIdentifier: "cameraSquareVC") as! CameraSquareViewController
             self.present(controller, animated: true, completion: nil)
         } else {
@@ -86,11 +81,15 @@ class ViewController: UIViewController {
     @IBAction func urlApiAction(_ sender: Any) {
         let alert = UIAlertController(title: "API URL", message: "", preferredStyle: .alert)
         alert.addTextField(configurationHandler: configurationTextField)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction) in
+            self.chooseOrientation()
+        }))
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler:{ (UIAlertAction) in
             ApiClient.defaults.set(self.urlTextField.text, forKey: "url_api")
             self.loadInitialSetting()
+            self.chooseOrientation()
         }))
+        
         self.present(alert, animated: true, completion: nil)
     }
     

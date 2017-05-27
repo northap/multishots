@@ -15,6 +15,7 @@ class OrientationSingleton {
         return instance
     }()
     
-    var isPortrait : Bool = true
+    var isPortrait : Bool = false
+    var isSquare : Bool = false
 
 }
