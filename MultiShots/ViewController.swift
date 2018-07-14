@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         if ApiClient.defaults.string(forKey: "url_api") == nil {
-            ApiClient.defaults.set("http://dev.businessinfratech.com/multi_shots_on_ios_server/pages/ios_api.php", forKey: "url_api")
+            ApiClient.defaults.set("http://houseofdev.tech/multi_shots_on_ios_server/pages/ios_api.php", forKey: "url_api")
         }
 
         let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(self.viewTapped))
@@ -108,7 +108,7 @@ class ViewController: UIViewController {
         ApiClient.getInitialSetting() { responseObject, error in
             print("responseObject = \(responseObject); error =\(error)")
             
-            if (error == nil) {
+            if (responseObject != nil) {
                 
                 self.bgImageView.image = responseObject?.home_bg_decoding()
                 self.logoImageView.image = responseObject?.logo_decoding()
