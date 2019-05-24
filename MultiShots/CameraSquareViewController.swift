@@ -65,7 +65,7 @@ class CameraSquareViewController: UIViewController, XMCCameraDelegate {
         return true
     }
     
-    func updateWaitTimer() {
+    @objc func updateWaitTimer() {
         
         if self.isShots == false {
             self.waitTimer.invalidate()
@@ -73,7 +73,7 @@ class CameraSquareViewController: UIViewController, XMCCameraDelegate {
         }
     }
     
-    func updateTimer() {
+    @objc func updateTimer() {
         
         
         self.countLabel.text = (self.countUpdated == 0) ? "" : "\(self.countUpdated!)"
@@ -89,7 +89,7 @@ class CameraSquareViewController: UIViewController, XMCCameraDelegate {
                 self.camera?.captureStillImage({ (image) -> Void in
                     if image != nil {
                         
-                        let metaRect : CGRect = (self.preview?.metadataOutputRectOfInterest(for: self.cameraPreview!.bounds))!
+                        let metaRect : CGRect = (self.preview?.metadataOutputRectConverted(fromLayerRect: self.cameraPreview!.bounds))!
                         
                         let originalSize = CGSize(width: (image?.size.height)!, height: (image?.size.width)!)
                         
@@ -211,7 +211,7 @@ class CameraSquareViewController: UIViewController, XMCCameraDelegate {
         
     }
     
-    func cancelButton() {
+    @objc func cancelButton() {
         self.updateResponseTimer()
     }
     
@@ -231,8 +231,8 @@ class CameraSquareViewController: UIViewController, XMCCameraDelegate {
     }
     
     func establishVideoPreviewArea() {
-        self.preview = AVCaptureVideoPreviewLayer(session: self.camera?.session)
-        self.preview?.videoGravity = AVLayerVideoGravityResizeAspectFill
+        self.preview = AVCaptureVideoPreviewLayer(session: self.camera!.session)
+        self.preview?.videoGravity = AVLayerVideoGravity.resizeAspectFill
     }
     @IBAction func retakeAction(_ sender: Any) {
         setStatusButtonStart();

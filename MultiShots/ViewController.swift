@@ -65,7 +65,7 @@ class ViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func viewTapped() {
+    @objc func viewTapped() {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         

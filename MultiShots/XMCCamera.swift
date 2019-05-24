@@ -38,7 +38,7 @@ class XMCCamera: NSObject {
     
     func initializeSession() {
         self.session = AVCaptureSession()
-        self.session.sessionPreset = AVCaptureSessionPresetPhoto
+        self.session.sessionPreset = AVCaptureSession.Preset.photo
         self.sessionQueue = DispatchQueue(label: "camera session", attributes: [])
         
         self.sessionQueue.async {
@@ -75,8 +75,8 @@ class XMCCamera: NSObject {
                     let c = connection as! AVCaptureConnection
                     
                     for port in c.inputPorts {
-                        let p = port as! AVCaptureInputPort
-                        if p.mediaType == AVMediaTypeVideo {
+                        let p = port as! AVCaptureInput.Port
+                        if p.mediaType == AVMediaType.video {
                             videoConnection = c;
                             break
                         }
@@ -88,8 +88,8 @@ class XMCCamera: NSObject {
                 }
                 
                 if videoConnection != nil {
-                    imageOutput.captureStillImageAsynchronously(from: videoConnection, completionHandler: { (imageSampleBuffer, error) -> Void in
-                        let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageSampleBuffer)
+                    imageOutput.captureStillImageAsynchronously(from: videoConnection!, completionHandler: { (imageSampleBuffer, error) -> Void in
+                        let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageSampleBuffer!)
                         let image: UIImage? = UIImage(data: imageData!)!
                         
                         DispatchQueue.main.async {
@@ -111,7 +111,7 @@ class XMCCamera: NSObject {
     // MARK: Configuration
     
     func addVideoInput() {
-        let device: AVCaptureDevice = self.deviceWithMediaTypeWithPosition(AVMediaTypeVideo as NSString, position: AVCaptureDevicePosition.front)
+        let device: AVCaptureDevice = self.deviceWithMediaTypeWithPosition(AVMediaType.video, position: AVCaptureDevice.Position.front)
         do {
             let input = try AVCaptureDeviceInput(device: device)
             if self.session.canAddInput(input) {
@@ -126,13 +126,13 @@ class XMCCamera: NSObject {
         stillImageOutput = AVCaptureStillImageOutput()
         stillImageOutput?.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
         
-        if self.session.canAddOutput(stillImageOutput) {
-            session.addOutput(stillImageOutput)
+        if self.session.canAddOutput(stillImageOutput!) {
+            session.addOutput(stillImageOutput!)
         }
     }
     
-    func deviceWithMediaTypeWithPosition(_ mediaType: NSString, position: AVCaptureDevicePosition) -> AVCaptureDevice {
-        let devices: NSArray = AVCaptureDevice.devices(withMediaType: mediaType as String) as NSArray
+    func deviceWithMediaTypeWithPosition(_ mediaType: AVMediaType, position: AVCaptureDevice.Position) -> AVCaptureDevice {
+        let devices: NSArray = AVCaptureDevice.devices(for: mediaType) as NSArray
         var captureDevice: AVCaptureDevice = devices.firstObject as! AVCaptureDevice
         for device in devices {
             let d = device as! AVCaptureDevice
@@ -155,14 +155,14 @@ class XMCCamera: NSObject {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func sessionDidStart(_ notification: Notification) {
+    @objc func sessionDidStart(_ notification: Notification) {
         DispatchQueue.main.async {
             NSLog("Session did start")
             self.delegate?.cameraSessionDidBegin()
         }
     }
     
-    func sessionDidStop(_ notification: Notification) {
+    @objc func sessionDidStop(_ notification: Notification) {
         DispatchQueue.main.async {
             NSLog("Session did stop")
             self.delegate?.cameraSessionDidStop()

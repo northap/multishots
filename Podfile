@@ -6,8 +6,8 @@ target 'MultiShots' do
   use_frameworks!
 
   # Pods for MultiShots
-pod 'Alamofire', '~> 4.0'
-pod 'AlamofireObjectMapper', '~> 4.0'
+pod 'Alamofire'
+pod 'AlamofireObjectMapper'
 pod 'SwiftyJSON'
 
 end
