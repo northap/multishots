@@ -29,10 +29,10 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
     var responseTimer: Timer!
     var countUpdated: Int!
     var roundUpdated: Int!
-    let countDownTime = Int(ApiClient.getSettings().shots_countdown_time!)!
-    let roundTime = Int(ApiClient.getSettings().number_of_shots!)!
-    let idleTime = Int(ApiClient.getSettings().idle_time!)!
-    let expectedImageWidth = Double(ApiClient.getSettings().expected_user_image_width_px!)!
+    let countDownTime = Int(ApiClient.getSettings().shots_countdown_time)!
+    let roundTime = Int(ApiClient.getSettings().number_of_shots)!
+    let idleTime = Int(ApiClient.getSettings().idle_time)!
+    let expectedImageWidth = Double(ApiClient.getSettings().expected_user_image_width_px)!
     let cameraBg = ApiClient.getSettings().camera_page_bg_decoding()
     let finalImageBg = ApiClient.getSettings().final_image_page_bg_decoding()
     var storeImages: [UIImage] = []
@@ -252,6 +252,7 @@ class CameraViewController: UIViewController, XMCCameraDelegate {
         let showImagesVC : ShowImagesViewController = storyboard.instantiateViewController(withIdentifier: "showImages") as! ShowImagesViewController
         let navVC = UINavigationController(rootViewController: showImagesVC)
         showImagesVC.storeImages = self.storeImages
+        navVC.modalPresentationStyle = .fullScreen
         self.present(navVC, animated: true, completion: nil)
     }
     

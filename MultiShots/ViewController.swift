@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         if ApiClient.defaults.string(forKey: "url_api") == nil {
-            ApiClient.defaults.set("http://houseofdev.tech/multi_shots_on_ios_server/pages/ios_api.php", forKey: "url_api")
+            ApiClient.defaults.set("https://touchpoint.houseofdev.tech/multi_shots_on_ios_server/pages/ios_api.php", forKey: "url_api")
         }
 
         let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(self.viewTapped))
@@ -60,7 +60,10 @@ class ViewController: UIViewController {
             OrientationSingleton.sharedInstance.isSquare = false
         }))
     
-        alert.popoverPresentationController?.sourceView = self.view
+        if let popoverController = alert.popoverPresentationController {
+          popoverController.sourceView = self.view
+          popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+        }
         
         self.present(alert, animated: true, completion: nil)
     }
@@ -71,9 +74,11 @@ class ViewController: UIViewController {
         
         if OrientationSingleton.sharedInstance.isSquare {
             let controller = storyboard.instantiateViewController(withIdentifier: "cameraSquareVC") as! CameraSquareViewController
+            controller.modalPresentationStyle = .fullScreen
             self.present(controller, animated: true, completion: nil)
         } else {
             let controller = storyboard.instantiateViewController(withIdentifier: "cameraVC") as! CameraViewController
+            controller.modalPresentationStyle = .fullScreen
             self.present(controller, animated: true, completion: nil)
         }
     }

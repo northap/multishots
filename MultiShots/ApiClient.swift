@@ -100,14 +100,14 @@ class ApiClient: NSObject {
     
     static func getSettings() -> SettingModel {
         let setting = SettingModel()
-        setting.home_bg = defaults.string(forKey: "home_bg")
-        setting.logo = defaults.string(forKey: "logo")
-        setting.number_of_shots = defaults.string(forKey: "number_of_shots")
-        setting.shots_countdown_time = defaults.string(forKey: "shots_countdown_time")
-        setting.idle_time = defaults.string(forKey: "idle_time")
-        setting.expected_user_image_width_px = defaults.string(forKey: "expected_user_image_width_px")
-        setting.camera_page_bg = defaults.string(forKey: "camera_page_bg")
-        setting.final_image_page_bg = defaults.string(forKey: "final_image_page_bg")
+        setting.home_bg = defaults.string(forKey: "home_bg")!
+        setting.logo = defaults.string(forKey: "logo")!
+        setting.number_of_shots = defaults.string(forKey: "number_of_shots")!
+        setting.shots_countdown_time = defaults.string(forKey: "shots_countdown_time")!
+        setting.idle_time = defaults.string(forKey: "idle_time")!
+        setting.expected_user_image_width_px = defaults.string(forKey: "expected_user_image_width_px")!
+        setting.camera_page_bg = defaults.string(forKey: "camera_page_bg")!
+        setting.final_image_page_bg = defaults.string(forKey: "final_image_page_bg")!
         return setting
     }
 }

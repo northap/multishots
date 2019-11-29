@@ -10,18 +10,18 @@ import ObjectMapper
 
 class SettingModel: NSObject, Mappable {
     
-    var home_bg_image_type: String?
-    var home_bg: String?
-    var logo_image_type: String?
-    var logo: String?
-    var shots_countdown_time: String?
-    var number_of_shots: String?
-    var idle_time: String?
-    var expected_user_image_width_px: String?
-    var camera_page_image_type: String?
-    var camera_page_bg: String?
-    var final_image_page_image_type: String?
-    var final_image_page_bg: String?
+    var home_bg_image_type: String = ""
+    var home_bg: String = ""
+    var logo_image_type: String = ""
+    var logo: String = ""
+    var shots_countdown_time: String = ""
+    var number_of_shots: String = ""
+    var idle_time: String = ""
+    var expected_user_image_width_px: String = ""
+    var camera_page_image_type: String = ""
+    var camera_page_bg: String = ""
+    var final_image_page_image_type: String = ""
+    var final_image_page_bg: String = ""
     
     override init() {
         super.init()
@@ -45,7 +45,7 @@ class SettingModel: NSObject, Mappable {
     }
     
     func home_bg_decoding() -> UIImage {
-        let decodedData = Data(base64Encoded: self.home_bg!, options:NSData.Base64DecodingOptions(rawValue: 0))
+        let decodedData = Data(base64Encoded: self.home_bg, options:NSData.Base64DecodingOptions(rawValue: 0))
         
         if let image = UIImage(data: decodedData!) {
             return image
@@ -56,7 +56,7 @@ class SettingModel: NSObject, Mappable {
     }
     
     func logo_decoding() -> UIImage {
-        let decodedData = Data(base64Encoded: self.logo!, options:NSData.Base64DecodingOptions(rawValue: 0))
+        let decodedData = Data(base64Encoded: self.logo, options:NSData.Base64DecodingOptions(rawValue: 0))
         
         if let image = UIImage(data: decodedData!) {
             return image
@@ -66,7 +66,7 @@ class SettingModel: NSObject, Mappable {
     }
     
     func camera_page_bg_decoding() -> UIImage {
-        let decodedData = Data(base64Encoded: self.camera_page_bg!, options:NSData.Base64DecodingOptions(rawValue: 0))
+        let decodedData = Data(base64Encoded: self.camera_page_bg, options:NSData.Base64DecodingOptions(rawValue: 0))
         
         if let image = UIImage(data: decodedData!) {
             return image
@@ -76,7 +76,7 @@ class SettingModel: NSObject, Mappable {
     }
     
     func final_image_page_bg_decoding() -> UIImage {
-        let decodedData = Data(base64Encoded: self.final_image_page_bg!, options:NSData.Base64DecodingOptions(rawValue: 0))
+        let decodedData = Data(base64Encoded: self.final_image_page_bg, options:NSData.Base64DecodingOptions(rawValue: 0))
         
         if let image = UIImage(data: decodedData!) {
             return image
