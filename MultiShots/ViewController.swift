@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         if ApiClient.defaults.string(forKey: "url_api") == nil {
-            ApiClient.defaults.set("https://touchpoint.houseofdev.tech/multi_shots_on_ios_server/pages/ios_api.php", forKey: "url_api")
+            ApiClient.defaults.set("https://122.155.202.70:1080/index.php", forKey: "url_api")
         }
 
         let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(self.viewTapped))
